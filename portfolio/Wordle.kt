@@ -7,15 +7,16 @@
 fun main() 
 {   
     //Variable initialisation
-    Int noOfAttempts = 0
-    MutableList<String> wordList = readWordList("data/words.txt")  //Intialize list
-    String wordle = pickRandomWord(wordList)    //Target word
-    Boolean hasWon = false
+    var noOfAttempts: Int = 0
+    val wordList: MutableList<String> = readWordList("data/words.txt")  // Initialize list
+    val wordle: String = pickRandomWord(wordList)                       // Target word
+    var hasWon: Boolean = false
+
 
     for (attempts in 0..10) {
 
-        String guess = obtainGuess(attempts)
-        List<Int> matches = evaluateGuess(guess, wordle)
+        var guess: String = obtainGuess(attempts)
+        val matches: List<Int> = evaluateGuess(guess, wordle)
         displayGuess(guess, matches)
 
         if( matches.contains(0) )
@@ -40,8 +41,8 @@ fun main()
 
 fun readWordList(filename: String): MutableList<String>
 {
-    String file = File(filename).readText()
-    output = file.split("\n").toMutableList()
+    val file: String = File(filename).readText()
+    val output: MutableList<String> = file.split("\n").toMutableList()
 
     return output
 }
@@ -58,7 +59,7 @@ fun isValid(word: String): Boolean
     
 fun pickRandomWord(words: MutableList<String>): String
 {
-    String word = words[Random.nextInt( 0 , words.size - 1)]
+    val word: String = words[Random.nextInt( 0 , words.size - 1)]
     
     return word
 }
@@ -66,12 +67,12 @@ fun pickRandomWord(words: MutableList<String>): String
 fun obtainGuess(attempt: Int): String
 {
     println("Attempt"+attempt+":")  //Print attempt number
-    String guess = readLine()
+    var guess: String = readLine() ?: ""
 
     while(!isValid(guess))  //Loop message and input
     {
         println("Try again.")
-        guess = readLine()
+        guess = readLine() ?: ""
     }
     
     return guess
@@ -79,17 +80,17 @@ fun obtainGuess(attempt: Int): String
 
 fun evaluateGuess(guess: String, target: String): List<Int>
 {
-    MutableList<Int> evaluation = mutableListOf<Int>()
+    val evaluation: MutableList<Int> = mutableListOf<Int>()
 
     for (i in 0..4) 
     {
         if(guess[i] == target[i])
         {
-            evaluation[i] = 1
+            evaluation.add(1)
         }
         else
         {
-            evaluation[i] = 0
+            evaluation.add(0)
         }
     }
 
@@ -98,11 +99,11 @@ fun evaluateGuess(guess: String, target: String): List<Int>
 
 fun displayGuess(guess: String, matches: List<Int>)
 {
-    String output = ""
+    var output: String = ""
 
     for (i in 0..4) {
 
-        if(matches[i] = 1)
+        if(matches[i] == 1)
         {
             output += guess[i]
         }
