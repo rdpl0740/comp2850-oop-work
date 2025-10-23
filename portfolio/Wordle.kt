@@ -4,19 +4,24 @@
 • Repeatedly prompt the user to guess the chosen word
 • Give feedback on which letters have been guessed correctly*/
 
+import kotlin.random.Random
+import java.io.File
+
 fun main() 
 {   
+    
     //Variable initialisation
-    var noOfAttempts: Int = 0
-    val wordList: MutableList<String> = readWordList("data/words.txt")  // Initialize list
+    val wordList: MutableList<String> = readWordList("wordle/data/words.txt")  // Initialize list
     val wordle: String = pickRandomWord(wordList)                       // Target word
     var hasWon: Boolean = false
-
+    println(wordle)
 
     for (attempts in 0..10) {
 
+        
         var guess: String = obtainGuess(attempts)
         val matches: List<Int> = evaluateGuess(guess, wordle)
+        println(matches)
         displayGuess(guess, matches)
 
         if( matches.contains(0) )
@@ -25,7 +30,6 @@ fun main()
         }
         else
         {
-            noOfAttempts = attempts
             hasWon = true       //Only necessary for the case when attempts = 10, 
             println("Correct!")
             break
@@ -80,17 +84,13 @@ fun obtainGuess(attempt: Int): String
 
 fun evaluateGuess(guess: String, target: String): List<Int>
 {
-    val evaluation: MutableList<Int> = mutableListOf<Int>()
+    val evaluation = MutableList<Int>(5) { 0 }   //Intialised with 5 empty zeros
 
     for (i in 0..4) 
     {
         if(guess[i] == target[i])
         {
-            evaluation.add(1)
-        }
-        else
-        {
-            evaluation.add(0)
+            evaluation[i] = 1
         }
     }
 
