@@ -4,9 +4,6 @@
 • Repeatedly prompt the user to guess the chosen word
 • Give feedback on which letters have been guessed correctly*/
 
-public 
-public 
-
 fun main() 
 {   
     //Variable initialisation
