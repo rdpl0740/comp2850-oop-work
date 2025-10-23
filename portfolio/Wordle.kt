@@ -10,15 +10,40 @@ public
 fun main() 
 {   
     //Variable initialisation
+    Int noOfAttempts = 0
+    MutableList<String> wordList = readWordList("data/words.txt")  //Intialize list
+    String wordle = pickRandomWord(wordList)    //Target word
+    Boolean hasWon = false
 
-    MutableList<String> wordList = readWordList("portfolio/wordle/data/words")
-    String wordle = ""
+    for (attempts in 0..10) {
 
+        String guess = obtainGuess(attempts)
+        List<Int> matches = evaluateGuess(guess, wordle)
+        displayGuess(guess, matches)
+
+        if( matches.contains(0) )
+        {
+            println("Incorrect, try again.")
+        }
+        else
+        {
+            noOfAttempts = attempts
+            hasWon = true       //Only necessary for the case when attempts = 10, 
+            println("Correct!")
+            break
+        }
+    }
+
+    if(!hasWon)
+    {
+        println("You have run out of attempts and failed.")
+    }
+    
 }
 
 fun readWordList(filename: String): MutableList<String>
 {
-    String file = File(filename+".txt").readText()
+    String file = File(filename).readText()
     output = file.split("\n").toMutableList()
 
     return output
@@ -57,7 +82,7 @@ fun obtainGuess(attempt: Int): String
 
 fun evaluateGuess(guess: String, target: String): List<Int>
 {
-    MutableList evaluation = mutableListOf<Int>()
+    MutableList<Int> evaluation = mutableListOf<Int>()
 
     for (i in 0..4) 
     {
@@ -91,5 +116,5 @@ fun displayGuess(guess: String, matches: List<Int>)
 
     }
 
-    return output
+    println(output)
 }
