@@ -6,7 +6,7 @@ import java.io.ByteArrayInputStream
 
 import java.io.PrintStream
 
-val WordleTest = StringSpec({
+class WordleTest : StringSpec({
 
     "isValid should only return true when 5 characters are input" {
         isValid("comps") shouldBe true
@@ -46,9 +46,9 @@ val WordleTest = StringSpec({
         val preInpStream = System.`in`
 
         val outputStream = ByteArrayOutputStream()
-        val testInp1 = ByteArrayInputStream("Brazen".toByteArray())
-        val testInp2 = ByteArrayInputStream("Red".toByteArray())
-        val testInp3 = ByteArrayInputStream("Press".toByteArray())
+        val testInp1 = ByteArrayInputStream("\nBrazen".toByteArray())
+        val testInp2 = ByteArrayInputStream("\nRed".toByteArray())
+        val testInp3 = ByteArrayInputStream("\nPress".toByteArray())
 
         System.setOut(PrintStream(outputStream))
         System.setIn(testInp1)
