@@ -7,6 +7,19 @@ plugins {
     application
 }
 
+detekt {
+    reports {
+        html {
+            enabled = true
+            destination = project.buildDir.resolve("reports/detekt/report.html")  // Updated
+        }
+        xml {
+            enabled = true
+            destination = project.buildDir.resolve("reports/detekt/report.xml")  // Updated
+        }
+    }
+}
+
 repositories {
     mavenCentral()
 }
