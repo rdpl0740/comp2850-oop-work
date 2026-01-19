@@ -27,3 +27,5 @@ On a Linux or macOS system, you might see a 'Permission denied' error when
 you attempt to run Gradle. If so, fix the script's permissions with
 
     chmod u+x gradlew
+
+# Completed
